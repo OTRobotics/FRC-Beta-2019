@@ -5,12 +5,13 @@ import org.usfirst.frc.team1374.robot.Util.Subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import edu.wpi.first.wpilibj.command.Subsystem;
+
+import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
-public class DriveSubsystem extends Subsystem {
+public class DriveSubsystem extends PIDSubsystem {
 
     public static int speedconst = 10;
     
@@ -21,6 +22,10 @@ public class DriveSubsystem extends Subsystem {
     public Compressor c = new Compressor(RobotMap.compressor);
 
     public static DoubleSolenoid shift = new DoubleSolenoid(RobotMap.shift1, RobotMap.shift2);
+
+    public DriveSubsystem () {
+        super("Drive", 0, 0, 0);
+    }
     
     public void CompressorControl(){
     	c.setClosedLoopControl(true);    
@@ -77,8 +82,8 @@ public class DriveSubsystem extends Subsystem {
     }
    
     public void shiftGear(boolean up, boolean down) {
-  //msg to future chris up and down is in drive commands and becomes 
-  //true/false when pressed and just change it from other things when changing
+        //msg to future chris up and down is in drive commands and becomes 
+        //true/false when pressed and just change it from other things when changing
     	if (up) {
     		shift.set(Value.kForward);
     	}
@@ -87,6 +92,15 @@ public class DriveSubsystem extends Subsystem {
     		shift.set(Value.kReverse);
     	}
     	
+    }
+
+    public double returnPIDInput() {
+        // return ahrs.pidGet();
+        return 0.0;
+    }
+    
+    public void usePIDOutput (double output) {
+
     }
     
 }

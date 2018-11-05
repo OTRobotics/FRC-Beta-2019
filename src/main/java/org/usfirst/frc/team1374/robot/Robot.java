@@ -23,10 +23,13 @@ import org.usfirst.frc.team1374.robot.Util.Subsystems;
 public class Robot extends IterativeRobot {
 
     public static OI oi;
+
     Command DriveCommands;
     Command IntakeCommands;
+
     Subsystems sub;
     Command autonomousCommand;
+    
     SendableChooser<String> chooser;
 
     /**

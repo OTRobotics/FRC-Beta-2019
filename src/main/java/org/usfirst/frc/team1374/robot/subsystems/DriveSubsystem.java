@@ -3,6 +3,8 @@ package org.usfirst.frc.team1374.robot.subsystems;
 import org.usfirst.frc.team1374.robot.RobotMap;
 import org.usfirst.frc.team1374.robot.Util.Subsystems;
 
+import com.kauailabs.navx.frc.AHRS;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
@@ -19,8 +21,10 @@ public class DriveSubsystem extends PIDSubsystem {
     public TalonSRX left2 = new TalonSRX(RobotMap.left2);
     public TalonSRX right1 = new TalonSRX(RobotMap.right1);
     public TalonSRX right2 = new TalonSRX(RobotMap.right2);
-    public Compressor c = new Compressor(RobotMap.compressor);
 
+    public AHRS ahrs;
+
+    public Compressor c = new Compressor(RobotMap.compressor);
     public static DoubleSolenoid shift = new DoubleSolenoid(RobotMap.shift1, RobotMap.shift2);
 
     public DriveSubsystem () {
@@ -95,12 +99,11 @@ public class DriveSubsystem extends PIDSubsystem {
     }
 
     public double returnPIDInput() {
-        // return ahrs.pidGet();
-        return 0.0;
+        return ahrs.pidGet();
     }
     
     public void usePIDOutput (double output) {
-
+        
     }
     
 }

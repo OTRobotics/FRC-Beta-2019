@@ -1,11 +1,11 @@
 package org.usfirst.frc.team1374.robot.commands;
-
 import org.usfirst.frc.team1374.robot.Util.Subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Command;
+
 /* MATH******
  * LOWGEAR RATIO 154:66
  * HIGHGEAR RATIO 138:82

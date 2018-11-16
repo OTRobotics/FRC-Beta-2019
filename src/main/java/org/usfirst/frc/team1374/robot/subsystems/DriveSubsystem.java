@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 public class DriveSubsystem extends PIDSubsystem {
 
     public static int speedconst = 10;
+    public static double angle = 0;
     
     public TalonSRX left1 = new TalonSRX(RobotMap.left1);
     public TalonSRX left2 = new TalonSRX(RobotMap.left2);
@@ -30,46 +31,45 @@ public class DriveSubsystem extends PIDSubsystem {
     public DriveSubsystem () {
         super("Drive", 0, 0, 0);
     }
-    
-    public void CompressorControl(){
+
+    public void CompressorControl (){
     	c.setClosedLoopControl(true);    
     }
     
-    public void setPIDDRIVE() {
+    public void setPIDDRIVE () {
     	left1.set(ControlMode.Position, 0);
     	right1.set(ControlMode.Position, 0);
     	left2.set(ControlMode.Follower, 0);
     	right2.set(ControlMode.Follower, 2);
     }
     
-    public void setREGULARDRIVE(){
+    public void setREGULARDRIVE (){
     	left1.set(ControlMode.Velocity, 0);
     	right1.set(ControlMode.Velocity, 0);
     	left2.set(ControlMode.Follower, 0);
     	right2.set(ControlMode.Follower, 2);
     }
     
-    public void distanceDrive(int distance) {
+    public void distanceDrive (int distance) {
     	left1.set(ControlMode.Position, distance * 4096);
     	left2.set(ControlMode.Follower, 0);
     	right1.set(ControlMode.Position, distance * 4096);
     	right2.set(ControlMode.Follower, 2);
     }
     
-    @Override
-    protected void initDefaultCommand() {
+    protected void initDefaultCommand () {
     	left2.set(ControlMode.Follower, 0);
     	right2.set(ControlMode.Follower, 2);
     }
     
-    public void tankDrive(double left, double right) {
+    public void tankDrive (double left, double right) {
         left1.set(ControlMode.PercentOutput, left);
         left2.set(ControlMode.PercentOutput, left);
         right1.set(ControlMode.PercentOutput, -right);
         right2.set(ControlMode.PercentOutput, -right);
     }
 
-    public void distanceTankDrive(double left, double right) {
+    public void distanceTankDrive (double left, double right) {
     	left1.set(ControlMode.Position, 500);
 		left2.set(ControlMode.Follower, 0);
 		right1.set(ControlMode.Position, 500);
@@ -80,12 +80,12 @@ public class DriveSubsystem extends PIDSubsystem {
         tankDrive (speed-turn, speed+turn);
     }
     
-    public String distanceArcadeDrive(double speed, double turn) {
+    public String distanceArcadeDrive (double speed, double turn) {
     	tankDrive ((speed-turn) * 4096 * 500.0 / 600, (speed+turn) * 4096 * 500.0 / 600);
     	return (speed-turn) * 4096 * 500.0 / 600 + "";
     }
    
-    public void shiftGear(boolean up, boolean down) {
+    public void shiftGear (boolean up, boolean down) {
         //msg to future chris up and down is in drive commands and becomes 
         //true/false when pressed and just change it from other things when changing
     	if (up) {
@@ -98,7 +98,12 @@ public class DriveSubsystem extends PIDSubsystem {
     	
     }
 
-    public double returnPIDInput() {
+    public void resetGyroAngle () {
+        ahrs.reset();
+        angle = 0;
+    }
+
+    public double returnPIDInput () {
         return ahrs.pidGet();
     }
     

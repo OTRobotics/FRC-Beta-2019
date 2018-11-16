@@ -14,12 +14,10 @@ public class DriveCommand extends Command {
     }
     
     //StringBuilder _sb = new StringBuilder();
-    
-    @Override
+
     protected void initialize() {
     }
 
-    @Override
     protected void execute() {
     	Subsystems.DRIVE_SUBSYSTEM.arcadeDrive(OI.getDriverSpeed(), OI.getSteer());
     	/*if (OI.distanceDrive()) {
@@ -46,17 +44,14 @@ public class DriveCommand extends Command {
    	 	_sb.setLength(0); */
     }
 
-    @Override
     protected boolean isFinished() {
         return false;
     }
 
-    @Override
     protected void end() {
 
     }
 
-    @Override
     protected void interrupted() {
 
     }

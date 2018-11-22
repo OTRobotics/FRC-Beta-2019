@@ -12,7 +12,7 @@ public class OI {
    
 
     // driver
-    public static double getDriverSpeed() { return Driver.getLeftTrigger() - Driver.getRightTrigger(); }
+    public static double getDriverSpeed() { return Driver.getRightTrigger() - Driver.getLeftTrigger(); }
     public static double getSteer() { return Driver.getLeftXAxis(); }
 
     

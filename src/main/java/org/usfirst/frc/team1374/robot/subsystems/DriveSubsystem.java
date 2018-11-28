@@ -16,7 +16,9 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 public class DriveSubsystem extends PIDSubsystem {
 
     public static int speedconst = 10;
-    public static double angle = 0;
+
+    public double angle = 0;
+    public double maxGyro = 0.5;
     
     public TalonSRX left1 = new TalonSRX(RobotMap.left1);
     public TalonSRX left2 = new TalonSRX(RobotMap.left2);
@@ -98,6 +100,13 @@ public class DriveSubsystem extends PIDSubsystem {
     	
     }
 
+    public double gyroDrive (double turn) {
+        angle += turn;
+        int b = (int) angle/180;
+        angle = (double) (angle * Math.pow(-1, b));
+        return angle;
+    }
+
     public void resetGyroAngle () {
         ahrs.reset();
         angle = 0;
@@ -108,7 +117,9 @@ public class DriveSubsystem extends PIDSubsystem {
     }
     
     public void usePIDOutput (double output) {
-        
+        if (output >= maxGyro) {
+            output = maxGyro;
+        }
     }
     
 }

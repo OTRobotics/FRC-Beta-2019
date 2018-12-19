@@ -34,7 +34,7 @@ public class DriveSubsystem extends PIDSubsystem {
         super("Drive", 0, 0, 0);
     }
 
-    public void CompressorControl (){
+    public void CompressorControl () {
     	c.setClosedLoopControl(true);    
     }
     
@@ -45,7 +45,7 @@ public class DriveSubsystem extends PIDSubsystem {
     	right2.set(ControlMode.Follower, 2);
     }
     
-    public void setREGULARDRIVE (){
+    public void setREGULARDRIVE () {
     	left1.set(ControlMode.Velocity, 0);
     	right1.set(ControlMode.Velocity, 0);
     	left2.set(ControlMode.Follower, 0);
